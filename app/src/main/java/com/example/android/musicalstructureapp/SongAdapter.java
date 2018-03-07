@@ -48,6 +48,20 @@ public class SongAdapter extends ArrayAdapter<Song> {
         TextView nameTextView = (TextView) listItemView.findViewById(R.id.song);
         nameTextView.setText(currentSong.getTitle());
 
+        TextView durationTextView = (TextView) listItemView.findViewById(R.id.duration);
+
+        int div = currentSong.getDuration()/60;
+        int mod = currentSong.getDuration()%60;
+
+        //here if the seconds are single digit we want the 0 vefore the digit eg 5:07 instead of 5:7
+        if(mod<10){
+            String dur = div +":0"+mod;
+            durationTextView.setText(dur);
+        }else {
+            String dur = div + ":" + mod;
+            durationTextView.setText(dur);
+        }
+
 
         return listItemView;
     }

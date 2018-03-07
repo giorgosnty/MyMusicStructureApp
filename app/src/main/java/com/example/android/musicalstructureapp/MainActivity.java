@@ -5,88 +5,101 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    private static boolean play =true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //find the view that shows song
-         final TextView playnow = (TextView) findViewById(R.id.song);
-
-
+        //find the view that shows selected song
+        final TextView playnow = (TextView) findViewById(R.id.song);
 
         //Creates an ArrayList of Song objects
-         final ArrayList<Song> songs = new ArrayList<Song>();
+        final ArrayList<Song> songs = new ArrayList<Song>();
 
-        songs.add(new Song("Wholla lotta love", "Led Zeppelin", "Led Zeppelin 2", 1969));
-        songs.add(new Song("La Grange", "ZZ Top", "Tres Hombres", 1973));
-        songs.add(new Song("Child in time", "Deep Purple", "Deep Purple in Rock", 1970));
-        songs.add(new Song("November Rain", "Guns n Roses", "Use your Illusion I", 1991));
-        songs.add(new Song("Moon Child", "Rory Galagher", "Calling Card", 1976));
+        //it finds the play/pause button
+        final ImageView play_pause =(ImageView) findViewById(R.id.play_pause);
 
+        songs.add(new Song("Wholla lotta love", "Led Zeppelin", "Led Zeppelin 2", "1969",289,"wholla_lotta_love"));
+        songs.add(new Song("La Grange", "ZZ Top", "Tres Hombres", "1973",228,"la_grange"));
+        songs.add(new Song("Child in time", "Deep Purple", "Deep Purple in Rock", "1970",619,"child_in_time"));
+        songs.add(new Song("November Rain", "Guns n Roses", "Use your Illusion I", "1991",548,"november_rain"));
+        songs.add(new Song("Moon Child", "Rory Galagher", "Calling Card", "1976",287,"moonchild"));
 
+        //we initiate our custom adapter with the songs in the arraylist
         SongAdapter itemsAdapter = new SongAdapter(this, songs);
         ListView listView = (ListView) findViewById(R.id.listview);
         listView.setAdapter(itemsAdapter);
 
 
+
+        //when someone selects a song
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                // TODO Auto-generated method stub
-                Toast.makeText(MainActivity.this, songs.get(position).getArtist(), Toast.LENGTH_SHORT).show();
 
                 final String currentArtist = songs.get(position).getArtist();
-                String currentTitle = songs.get(position).getTitle();
-                String currentAlbum = songs.get(position).getAlbum();
-                int currentYear = songs.get(position).getYear();
+                final String currentAlbum = songs.get(position).getAlbum();
+                final String currentYear = songs.get(position).getYear();
+                final String currentIconName=songs.get(position).getIcon_name();
 
+                String currentTitle = songs.get(position).getTitle();
+
+
+                //sets the title of the song selected in the playnow tab
                 playnow.setText(currentTitle );
 
-                TextView artist = (TextView) findViewById(R.id.artist_textview);
-                //artist.setText(currentArtist);
-                TextView album = (TextView) findViewById(R.id.album_textview);
-                //artist.setText(currentAlbum);
-                TextView year = (TextView) findViewById(R.id.year_textview);
-                //artist.setText(currentYear);
+                play_pause.setImageResource(R.drawable.play);
 
+                //when someone clicks the playing now tab after selecting a song they will open playingnow activity
                 playnow.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent songIntent = new Intent(MainActivity.this, PlayingNowActivity.class);
                         songIntent.putExtra("artist",currentArtist);
+                        songIntent.putExtra("album",currentAlbum);
+                        songIntent.putExtra("year",currentYear);
+                        songIntent.putExtra("icon_name",currentIconName);
                         startActivity(songIntent);
+
                     }
                 });
+
+                play_pause.setOnClickListener(new View.OnClickListener(){
+
+                    @Override
+                    public void onClick(View view) {
+                        //checks if it was play so it makes it pause when you press it
+                        if(play) {
+                            play_pause.setImageResource(R.drawable.pause);
+                            play = false;
+                        }else{
+                            play_pause.setImageResource(R.drawable.play);
+                            play = true;
+                        }
+
+                    }
+
+                });
+
+
 
             }
         });
 
     }
 
-//    public static View getViewByPosition(int pos, ListView list) {
-//        final int firstListItemPosition = list.getFirstVisiblePosition();
-//        final int lastListItemPosition = firstListItemPosition + list.getChildCount() - 1;
-//
-//        if (pos < firstListItemPosition || pos > lastListItemPosition ) {
-//            return list.getAdapter().getView(pos, null, list);
-//        } else {
-//            final int childIndex = pos - firstListItemPosition;
-//            return list.getChildAt(childIndex);
-//        }
-//    }
 
 }

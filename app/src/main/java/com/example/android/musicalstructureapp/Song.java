@@ -9,17 +9,21 @@ public class Song {
     private String title;
     private String artist;
     private String album;
-    private int year;
+    private String year;
+    private int duration;
+    private String icon_name;
 
-    public Song(String Title,String Artist,String Album,int Year){
+    public Song(String Title,String Artist,String Album,String Year,int Duration,String Icon_name){
         album=Album;
         title=Title;
         artist=Artist;
         year=Year;
+        duration=Duration;
+        icon_name=Icon_name;
     }
 
     //returns the year of the song
-    public int getYear() {
+    public String getYear() {
         return year;
     }
 
@@ -38,4 +42,12 @@ public class Song {
         return title;
     }
 
+    //returns duration
+    public int getDuration() {
+        return duration;
+    }
+
+    public String getIcon_name() {
+        return icon_name;
+    }
 }

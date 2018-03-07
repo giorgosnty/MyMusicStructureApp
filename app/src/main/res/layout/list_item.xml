@@ -13,15 +13,30 @@
 
         />
 
-
-    <TextView
-        android:layout_marginRight="8dp"
-        android:textSize="18dp"
-        android:id="@+id/song"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="title"/>
+        >
 
+        <TextView
+            android:textColor="@color/white"
+            android:layout_marginRight="8dp"
+            android:textSize="18dp"
+            android:id="@+id/song"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="title"/>
+
+        <TextView
+            android:textColor="@color/white"
+            android:id="@+id/duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:text="duration"
+            android:layout_alignParentRight="true"
+            />
+    </RelativeLayout>
 
 
 </LinearLayout>
