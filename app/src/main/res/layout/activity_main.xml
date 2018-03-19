@@ -6,24 +6,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.android.musicalstructureapp.MainActivity"
-    android:background="@color/black"
+    android:background="@color/main_backgr"
     >
 
-
-
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignTop="@+id/listview"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="10dp"
-        android:text="My music app"
-        android:textSize="18sp"
-        android:layout_centerHorizontal="true"/>
+        android:background="@color/title_backgr"
+        android:gravity = "center">
+
+        <TextView
+            android:id="@+id/myApp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignTop="@+id/listview"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:text="My music app"
+            android:textSize="24sp"
+            android:layout_gravity = "center"
+            android:textColor="@color/black"
+            android:fontFamily="cursive"
+            />
+    </LinearLayout>
 
     <ListView
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="48dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/listview"
@@ -32,22 +41,23 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-       >
-
+        android:layout_gravity="center_horizontal">
 
 
         <TextView
             android:id="@+id/song"
-            android:background="@color/white"
-            android:textColor="@color/black"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_alignParentBottom="true"
+            android:background="@color/playing_now_backgr"
+            android:clickable="true"
+            android:gravity="center"
             android:padding="14dp"
             android:text="Please select a song"
-            android:gravity="center_vertical"
-            android:clickable="true"
-             />
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            />
+
 
         <ImageView
             android:id="@+id/play_pause"
@@ -57,7 +67,8 @@
             android:layout_alignParentBottom="true"
             android:clickable="true"
             android:layout_alignTop="@+id/song"
-            android:layout_marginRight="14dp"/>
+            android:layout_marginRight="14dp"
+            android:layout_gravity="center"/>
 
     </RelativeLayout>
 

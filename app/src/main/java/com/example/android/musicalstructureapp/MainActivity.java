@@ -1,6 +1,7 @@
 package com.example.android.musicalstructureapp;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -20,14 +21,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //find the view that shows selected song
+        //finds the view that shows selected song in the bottom of the main screen
         final TextView playnow = (TextView) findViewById(R.id.song);
+
+        //sets a custom font to the playng now song window
+        Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/quicksand_m.ttf");
+        playnow.setTypeface(custom_font);
 
         //Creates an ArrayList of Song objects
         final ArrayList<Song> songs = new ArrayList<Song>();
-
-        //it finds the play/pause button
-        final ImageView play_pause =(ImageView) findViewById(R.id.play_pause);
 
         songs.add(new Song("Wholla lotta love", "Led Zeppelin", "Led Zeppelin 2", "1969",289,"wholla_lotta_love"));
         songs.add(new Song("La Grange", "ZZ Top", "Tres Hombres", "1973",228,"la_grange"));
@@ -40,9 +42,10 @@ public class MainActivity extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.listview);
         listView.setAdapter(itemsAdapter);
 
+        //it finds the play/pause button
+        final ImageView play_pause =(ImageView) findViewById(R.id.play_pause);
 
-
-        //when someone selects a song
+        //when someone selects a song these events take place
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
 
@@ -50,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
 
+                //first of all we store the information of current object
                 final String currentArtist = songs.get(position).getArtist();
                 final String currentAlbum = songs.get(position).getAlbum();
                 final String currentYear = songs.get(position).getYear();
@@ -57,11 +61,12 @@ public class MainActivity extends AppCompatActivity {
 
                 String currentTitle = songs.get(position).getTitle();
 
-
                 //sets the title of the song selected in the playnow tab
                 playnow.setText(currentTitle );
 
-                play_pause.setImageResource(R.drawable.play);
+                //before someone selects a song this image is not visible,so now
+                //it gets visible and is the play button ready to be pressed
+                play_pause.setImageResource(R.drawable.play_btn);
 
                 //when someone clicks the playing now tab after selecting a song they will open playingnow activity
                 playnow.setOnClickListener(new View.OnClickListener() {
@@ -86,20 +91,14 @@ public class MainActivity extends AppCompatActivity {
                             play_pause.setImageResource(R.drawable.pause);
                             play = false;
                         }else{
-                            play_pause.setImageResource(R.drawable.play);
+                            play_pause.setImageResource(R.drawable.play_btn);
                             play = true;
                         }
 
                     }
 
                 });
-
-
-
             }
         });
-
     }
-
-
 }

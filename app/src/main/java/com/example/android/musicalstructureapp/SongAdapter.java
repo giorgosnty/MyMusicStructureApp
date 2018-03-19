@@ -48,6 +48,7 @@ public class SongAdapter extends ArrayAdapter<Song> {
         TextView nameTextView = (TextView) listItemView.findViewById(R.id.song);
         nameTextView.setText(currentSong.getTitle());
 
+
         TextView durationTextView = (TextView) listItemView.findViewById(R.id.duration);
 
         int div = currentSong.getDuration()/60;

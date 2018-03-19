@@ -5,4 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
+    <color name="main_backgr">#dbdbf0</color>
+    <color name="title_backgr">#b7b7e1</color>
+    <color name="playing_now_backgr">#9393d2</color>
 </resources>
